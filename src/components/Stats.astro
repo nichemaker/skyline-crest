@@ -1,0 +1,18 @@
+---
+const stats = [
+  { target: 18,   suffix: '+',  label: 'Years of Experience' },
+  { target: 1200, suffix: '+',  label: 'Happy Clients' },
+  { target: 850,  suffix: '+',  label: 'Properties Closed' },
+  { target: 25,   suffix: 'L+', label: 'Sq. Ft. Advised' },
+];
+---
+<section id="stats" data-stats>
+  <div class="stats-grid">
+    {stats.map(s => (
+      <div>
+        <div class="stat-num" data-counter data-target={s.target} data-suffix={s.suffix}>0</div>
+        <div class="stat-label">{s.label}</div>
+      </div>
+    ))}
+  </div>
+</section>

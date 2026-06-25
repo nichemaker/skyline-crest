@@ -1,0 +1,127 @@
+---
+const listings = [
+  { title: 'Bespoke 4 BHK Builder Floor',   loc: 'DLF Phases',        type: 'Builder Floor', beds: '4 BHK',  size: '3,150 sq.ft',  priceLabel: '₹5.4 Cr',   price: 5.4,  label: 'builder floor · dlf phase 2' },
+  { title: 'Golf-Facing Sky Residence',      loc: 'Golf Course Road',  type: 'Apartment',     beds: '3 BHK',  size: '2,640 sq.ft',  priceLabel: '₹6.9 Cr',   price: 6.9,  label: 'hi-rise · golf course rd' },
+  { title: 'Independent Designer Villa',     loc: 'Sushant Lok',       type: 'Villa',         beds: '5 BHK',  size: '5,200 sq.ft',  priceLabel: '₹8.75 Cr',  price: 8.75, label: 'villa · sushant lok' },
+  { title: 'Pre-Leased Retail Suite',        loc: 'Sohna Road',        type: 'Commercial',    beds: 'Retail', size: '1,800 sq.ft',  priceLabel: '₹3.2 Cr',   price: 3.2,  label: 'retail · sohna road' },
+  { title: 'Corner Freehold Plot',           loc: 'Dwarka Expressway', type: 'Plot',          beds: 'Plot',   size: '360 sq.yd',    priceLabel: '₹2.7 Cr',   price: 2.7,  label: 'plot · dwarka expwy' },
+  { title: 'Garden Apartment',               loc: 'South City',        type: 'Apartment',     beds: '3 BHK',  size: '2,100 sq.ft',  priceLabel: '₹2.4 Cr',   price: 2.4,  label: 'apartment · south city' },
+];
+---
+<section id="properties">
+  <div class="section-inner">
+    <div data-reveal style="max-width:580px;margin-bottom:30px;">
+      <div class="section-eyebrow">
+        <span class="section-eyebrow-line"></span>
+        <span class="section-eyebrow-text">Featured listings</span>
+      </div>
+      <h2 class="section-h2">
+        <span>A curated handful,</span>
+        not a crowded directory.
+      </h2>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="filter-bar">
+      <label class="filter-label">
+        <span class="filter-label-text">Location</span>
+        <select id="filter-loc">
+          <option>All</option>
+          <option>DLF Phases</option>
+          <option>Golf Course Road</option>
+          <option>Sushant Lok</option>
+          <option>Sohna Road</option>
+          <option>Dwarka Expressway</option>
+          <option>South City</option>
+        </select>
+      </label>
+      <label class="filter-label">
+        <span class="filter-label-text">Type</span>
+        <select id="filter-type">
+          <option>All</option>
+          <option>Builder Floor</option>
+          <option>Apartment</option>
+          <option>Villa</option>
+          <option>Commercial</option>
+          <option>Plot</option>
+        </select>
+      </label>
+      <label class="filter-label">
+        <span class="filter-label-text">Budget</span>
+        <select id="filter-budget">
+          <option>Any</option>
+          <option>Under ₹3 Cr</option>
+          <option>₹3–6 Cr</option>
+          <option>₹6 Cr+</option>
+        </select>
+      </label>
+      <div class="filter-count"><span id="result-count">{listings.length}</span> properties</div>
+    </div>
+
+    <div class="listings-grid" id="listings-grid">
+      {listings.map(p => (
+        <div
+          class="listing-card"
+          data-loc={p.loc}
+          data-type={p.type}
+          data-price={p.price}
+        >
+          <div class="listing-img">
+            <span class="listing-img-label">{p.label}</span>
+            <span class="listing-type-badge">{p.type}</span>
+          </div>
+          <div class="listing-body">
+            <div class="listing-loc">{p.loc}</div>
+            <h3 class="listing-title">{p.title}</h3>
+            <div class="listing-meta">
+              <span>{p.beds}</span><span>·</span><span>{p.size}</span>
+            </div>
+            <div class="listing-footer">
+              <span class="listing-price">{p.priceLabel}</span>
+              <a href="#contact" class="listing-link">View Details <span>→</span></a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="no-results" id="no-results" style="display:none;">
+      <h3>No matches for that combination.</h3>
+      <p>Adjust the filters — or <a href="#contact">tell us what you're after</a> and we'll source it.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const loc    = document.getElementById('filter-loc') as HTMLSelectElement;
+  const type   = document.getElementById('filter-type') as HTMLSelectElement;
+  const budget = document.getElementById('filter-budget') as HTMLSelectElement;
+  const cards  = document.querySelectorAll<HTMLElement>('.listing-card');
+  const count  = document.getElementById('result-count')!;
+  const noRes  = document.getElementById('no-results')!;
+
+  function budgetMatch(price: number, val: string) {
+    if (val === 'Under ₹3 Cr') return price < 3;
+    if (val === '₹3–6 Cr')     return price >= 3 && price < 6;
+    if (val === '₹6 Cr+')      return price >= 6;
+    return true;
+  }
+
+  function filter() {
+    let visible = 0;
+    cards.forEach(card => {
+      const show =
+        (loc.value === 'All'    || card.dataset.loc === loc.value) &&
+        (type.value === 'All'   || card.dataset.type === type.value) &&
+        budgetMatch(parseFloat(card.dataset.price!), budget.value);
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    count.textContent = String(visible);
+    noRes.style.display = visible === 0 ? '' : 'none';
+  }
+
+  loc.addEventListener('change', filter);
+  type.addEventListener('change', filter);
+  budget.addEventListener('change', filter);
+</script>

@@ -1,0 +1,12 @@
+---
+const developers = ['DLF', 'M3M', 'Godrej', 'Adani', 'Sobha', 'Whiteland', 'Tata Housing', 'Birla Estates', 'Smart World', 'Signature Global'];
+---
+<section id="marquee">
+  <div class="marquee-label">Advising on inventory from Gurgaon's leading developers</div>
+  <div class="marquee-track">
+    <div class="marquee-inner">
+      {developers.map(d => <span class="marquee-dev">{d}</span>)}
+      {developers.map(d => <span class="marquee-dev" aria-hidden="true">{d}</span>)}
+    </div>
+  </div>
+</section>

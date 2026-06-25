@@ -1,0 +1,35 @@
+---
+const testimonials = [
+  { quote: "Skyline Crest understood our brief better than we did. We closed on a Golf Course Road home in six weeks — well below asking.", name: 'Ananya & Rohan Mehta', role: 'Buyers · DLF Phase 4' },
+  { quote: "As an NRI I needed someone I could trust completely. Documentation, registry, handover — all managed remotely and flawlessly.", name: 'Vikram Suri', role: 'NRI Investor · Dubai' },
+  { quote: "Their read on Dwarka Expressway timing made our investment. Calm, data-led advice with zero pressure.", name: 'Neha Kapoor', role: 'Investor' },
+  { quote: "We interviewed four consultants. Skyline Crest was the only one that talked us out of a deal that wasn't right for us.", name: 'Arjun & Pooja Nair', role: 'First-time Buyers' },
+  { quote: "Pre-leased commercial suite delivering exactly the yield they projected. Genuinely advisory, not transactional.", name: 'Sanjay Goel', role: 'MD · Goel Ventures' },
+];
+---
+<section id="testimonials">
+  <div class="section-inner">
+    <div data-reveal style="max-width:620px;margin-bottom:clamp(36px,5vw,60px);">
+      <div class="section-eyebrow">
+        <span class="section-eyebrow-line"></span>
+        <span class="section-eyebrow-text">In their words</span>
+      </div>
+      <h2 class="section-h2">
+        <span>The relationships outlast</span>
+        the transactions.
+      </h2>
+    </div>
+    <div class="testimonials-masonry">
+      {testimonials.map(t => (
+        <figure class="testimonial">
+          <div class="testimonial-mark">"</div>
+          <blockquote class="testimonial-quote">{t.quote}</blockquote>
+          <figcaption class="testimonial-cap">
+            <div class="testimonial-name">{t.name}</div>
+            <div class="testimonial-role">{t.role}</div>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
