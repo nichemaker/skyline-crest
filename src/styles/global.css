@@ -208,7 +208,7 @@ button, input, select, textarea { font-family: inherit; }
 .mobile-menu-footer .mf-wa { background: #1FA855; color: #fff; border: none; }
 
 /* ---- Hero ---- */
-#hero {
+#home {
   position: relative;
   min-height: 100vh;
   display: flex; align-items: flex-end;
