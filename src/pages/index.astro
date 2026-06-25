@@ -140,4 +140,15 @@ const jsonLd = {
     }, { threshold: 0.35 });
     sio.observe(statsEl);
   }
+
+  // --- Gate hero animation to viewport ---
+  const heroBg = document.querySelector<HTMLElement>('.hero-bg');
+  if (heroBg) {
+    const hio = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        heroBg.style.animationPlayState = e.isIntersecting ? 'running' : 'paused';
+      });
+    }, { threshold: 0 });
+    hio.observe(document.querySelector('#home') || heroBg);
+  }
 </script>
