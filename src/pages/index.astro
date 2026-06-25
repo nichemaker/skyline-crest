@@ -102,16 +102,6 @@ const jsonLd = {
     a.addEventListener('click', () => mobileMenu.classList.remove('open'))
   );
 
-  // --- Reveal on scroll ---
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        (e.target as HTMLElement).classList.add('revealed');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.14 });
-  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
 
   // --- Counter animation ---
   function runCounter(el: HTMLElement) {
