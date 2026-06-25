@@ -30,7 +30,7 @@ button, input, select, textarea { font-family: inherit; }
   --ph-b: rgba(14, 14, 16, .02);
 }
 
-[data-theme="dark"] {
+:root[data-theme="dark"] {
   --bg: #0E0E10;
   --bg-alt: #161619;
   --surface: #161619;

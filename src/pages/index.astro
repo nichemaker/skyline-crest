@@ -44,7 +44,7 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
-  <div id="site-root" data-theme="light" style="font-family:'Hanken Grotesk',-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative;transition:background .4s ease,color .4s ease;">
+  <div id="site-root" style="font-family:'Hanken Grotesk',-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative;transition:background .4s ease,color .4s ease;">
     <Header />
     <main>
       <Hero />
@@ -74,7 +74,6 @@ const jsonLd = {
 </Layout>
 
 <script>
-  const root      = document.getElementById('site-root')!;
   const header    = document.getElementById('site-header')!;
   const toggle    = document.getElementById('theme-toggle')!;
   const hamburger = document.getElementById('hamburger')!;
@@ -89,8 +88,8 @@ const jsonLd = {
 
   // --- Theme ---
   function toggleTheme() {
-    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
-    root.dataset.theme = next;
+    const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = next;
   }
   toggle.addEventListener('click', toggleTheme);
   mobileTheme.addEventListener('click', toggleTheme);
@@ -101,7 +100,6 @@ const jsonLd = {
   mobileMenu.querySelectorAll('a').forEach(a =>
     a.addEventListener('click', () => mobileMenu.classList.remove('open'))
   );
-
 
   // --- Counter animation ---
   function runCounter(el: HTMLElement) {
